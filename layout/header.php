@@ -42,6 +42,7 @@
 
     <script src="assets/js/config.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
         body {
@@ -99,7 +100,8 @@
             overflow-x: hidden;
 
         }
-        .navbar-nav{
+
+        .navbar-nav {
             margin-right: 20px;
         }
     </style>
@@ -128,3 +130,30 @@
 
 
                 <div class="content-wrapper">
+
+
+                    <script>
+                        $(document).ready(function () {
+
+                            $('#logoutBtn').on('click', function (e) {
+                                e.preventDefault();
+                                $.ajax({
+                                    url: 'logout.php',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    success: function (response) {
+                                        if (response.success) {
+                                            // alert('Logout successful!');
+                                            window.location.href = 'login.php';
+                                        } else {
+                                            alert('Logout failed: ' + response.message);
+                                        }
+                                    },
+                                    error: function () {
+                                        alert('An error occurred. Please try again.');
+                                    }
+                                });
+
+                            });
+                        });
+                    </script>

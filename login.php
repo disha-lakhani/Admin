@@ -43,6 +43,12 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="assets/js/config.js"></script>
+
+    <style>
+        body {
+            font-family: "Roboto Slab", serif;
+        }
+    </style>
 </head>
 
 <body>
@@ -98,9 +104,9 @@
                         <h4 class="mb-1">Welcome to Materio! 👋🏻</h4>
                         <p class="mb-5">Sign in to access your dashboard.</p>
 
-                        <form id="formAuthentication" class="mb-5" action="index.html" method="POST">
+                        <form id="loginForm" class="mb-5" action="" method="">
                             <div class="form-floating form-floating-outline mb-5">
-                                <input type="text" class="form-control" id="email" name="email-username"
+                                <input type="text" class="form-control" id="email" name="email"
                                     placeholder="Enter your email or username" autofocus />
                                 <label for="email">Email or Username</label>
                             </div>
@@ -131,6 +137,7 @@
                                 <button class="btn btn-primary d-grid w-100" type="submit">login</button>
                             </div>
                         </form>
+                        <p id="message"></p>
 
 
                     </div>
@@ -168,6 +175,72 @@
 
     <!-- Place this tag before closing body tag for github widget button. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').on('submit', function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                $.ajax({
+                    url: 'log.php',
+                    method: 'POST',
+                    data: {
+                        email: $('#email').val(),
+                        password: $('#password').val()
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            $('#message')
+                                .text(response.message)
+                                .css({
+                                    'color': 'black',
+                                    'background-color': 'green',
+                                    'padding': '10px',
+                                    'border-radius': '5px',
+                                    'width': '100%',  // Make the message full width
+                                    'box-sizing': 'border-box',  // Ensure padding is included in width
+                                    'text-align': 'center'
+
+                                });
+                            setTimeout(function () {
+                                window.location.href = 'dashboard.php';
+                            }, 1000);
+                        } else {
+                            $('#message')
+                                .text(response.message)
+                                .css({
+                                    'color': 'white',
+                                    'background-color': 'red',
+                                    'padding': '10px',
+                                    'border-radius': '5px',
+                                    'width': '100%',
+                                    'box-sizing': 'border-box',
+                                    'text-align': 'center'
+                                });
+                        }
+                    },
+                    error: function () {
+                        $('#message')
+                            .text('An error occurred. Please try again.')
+                            .css({
+                                'color': 'white',
+                                'background-color': 'red',
+                                'padding': '10px',
+                                'border-radius': '5px',
+                                'width': '100%',
+                                'box-sizing': 'border-box',
+                                'text-align': 'center'
+                            });
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>

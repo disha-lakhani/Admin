@@ -107,10 +107,11 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="logout.php" class="menu-link">
+            <a href="#" id="logoutBtn" class="menu-link">
                 <i class="menu-icon tf-icons ri-logout-box-line"></i>
                 <div data-i18n="Logout">Logout</div>
             </a>
         </li>
     </ul>
 </aside>
+
