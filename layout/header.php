@@ -1,3 +1,62 @@
+<?php
+// session_start();
+
+// Check if the user is logged in and has a valid role
+if (!isset($_SESSION['role']) || !isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+// Include the database connection
+include 'db.php'; 
+
+$userId = $_SESSION['user_id'];
+$role = $_SESSION['role'];
+
+// Initialize variables
+$profileImage = "uploads/default.png"; // Default image if no profile image is found
+$fullName = "User";
+
+// Depending on the role, fetch user details
+if ($role == 1) {  // Admin
+    $sql = "SELECT ui.fname, ui.lname, ui.profileimage 
+            FROM userss u
+            JOIN user_info ui ON u.id = ui.user_id
+            WHERE u.id = $userId AND u.role = 1";  // Query for admin
+} elseif ($role == 2) {  // Manager
+    $sql = "SELECT ui.fname, ui.lname, ui.profileimage 
+            FROM userss u
+            JOIN user_info ui ON u.id = ui.user_id
+            WHERE u.id = $userId AND u.role = 2";  // Query for manager
+} elseif ($role == 3) {  // Staff
+    $sql = "SELECT ui.fname, ui.lname, ui.profileimage 
+            FROM userss u
+            JOIN user_info ui ON u.id = ui.user_id
+            WHERE u.id = $userId AND u.role = 3";  // Query for staff
+} else {
+    // If the role is invalid, redirect to login
+    header('Location: login.php');
+    exit();
+}
+
+// Execute the query
+$result = $conn->query($sql);
+
+// Check if the query was successful and data was found
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $fullName = $row['fname'] . ' ' . $row['lname'];
+    $profileImage = $row['profileimage'] ? $row['profileimage'] : "uploads/default.png"; // Fallback to default if no profile image
+} else {
+    // Fallback to default if no user data found
+    $fullName = "User Not Found";
+    $profileImage = "uploads/default.png";
+}
+
+$conn->close();
+?>
+
+
 <!doctype html>
 
 <html>
@@ -104,6 +163,7 @@
         .navbar-nav {
             margin-right: 20px;
         }
+        
     </style>
 </head>
 

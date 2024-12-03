@@ -1,3 +1,16 @@
+<?php
+// session_start();
+
+// Ensure the user is logged in
+if (!isset($_SESSION['role'])) {
+    header('Location: login.php');
+    exit();
+}
+
+$role = $_SESSION['role']; // Admin (1), Manager (2), Staff (3)
+
+?>
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-label-secondary fixed">
     <div class="app-brand demo">
         <a href="dashboard.php" class="app-brand-link">
@@ -41,12 +54,13 @@
 
     <div class="menu-inner-shadow"></div>
 
+    <?php if ($role == 1): ?>
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
         <li class="menu-item  ">
             <a href="dashboard.php" class="menu-link">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
-                <div data-i18n="Dashboards">Dashboards</div>
+                <div data-i18n="Dashboards">Dashboard</div>
 
             </a>
         </li>
@@ -61,7 +75,7 @@
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="adduser.php" class="menu-link">
-                        <div data-i18n="Without menu">Add Users</div>
+                        <div data-i18n="Without menu">Add User</div>
                     </a>
                 </li>
                 <li class="menu-item">
@@ -88,7 +102,7 @@
                 </li>
                 <li class="menu-item">
                     <a href="allproject.php" class="menu-link">
-                        <div data-i18n="Notifications">All Project</div>
+                        <div data-i18n="Notifications">All Projects</div>
                     </a>
                 </li>
                 <li class="menu-item">
@@ -100,7 +114,7 @@
         </li>
 
         <li class="menu-item">
-            <a href="" target="_blank" class="menu-link">
+            <a href="profile1.php" class="menu-link">
                 <i class="menu-icon tf-icons ri-user-line"></i>
                 <div data-i18n="Logistics">Profile</div>
 
@@ -113,5 +127,127 @@
             </a>
         </li>
     </ul>
+    <?php endif; ?>
+    <?php if ($role == 2): ?>
+    <ul class="menu-inner py-1">
+        <!-- Dashboards -->
+        <li class="menu-item  ">
+            <a href="dashboard.php" class="menu-link">
+                <i class="menu-icon tf-icons ri-home-smile-line"></i>
+                <div data-i18n="Dashboards">Dashboard</div>
+
+            </a>
+        </li>
+
+        <!-- Layouts -->
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ri-layout-2-line"></i>
+                <div data-i18n="Layouts">Project</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="allprojects.php" class="menu-link">
+                        <div data-i18n="Without menu">All Project</div>
+                    </a>
+                </li>
+               
+            </ul>
+        </li>
+
+
+        <!-- Pages -->
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ri-layout-left-line"></i>
+                <div data-i18n="Account Settings"> Team Member</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="alldetails.php" class="menu-link">
+                        <div data-i18n="Account">All Details</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-item">
+            <a href="profile1.php" class="menu-link">
+                <i class="menu-icon tf-icons ri-user-line"></i>
+                <div data-i18n="Logistics">Profile</div>
+
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="#" id="logoutBtn" class="menu-link">
+                <i class="menu-icon tf-icons ri-logout-box-line"></i>
+                <div data-i18n="Logout">Logout</div>
+            </a>
+        </li>
+    </ul>
+    <?php endif; ?>
+    <?php if ($role == 3): ?>
+    <ul class="menu-inner py-1">
+        <!-- Dashboards -->
+        <li class="menu-item  ">
+            <a href="dashboard.php" class="menu-link">
+                <i class="menu-icon tf-icons ri-home-smile-line"></i>
+                <div data-i18n="Dashboards">Dashboard</div>
+
+            </a>
+        </li>
+
+        <!-- Layouts -->
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ri-layout-2-line"></i>
+                <div data-i18n="Layouts">Project</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="allprojects.php" class="menu-link">
+                        <div data-i18n="Without menu">All Project</div>
+                    </a>
+                </li>
+               
+            </ul>
+        </li>
+
+
+        <!-- Pages -->
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ri-layout-left-line"></i>
+                <div data-i18n="Account Settings"> Team Member</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="alldetails.php" class="menu-link">
+                        <div data-i18n="Account">All Details</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-item">
+            <a href="profile1.php" class="menu-link">
+                <i class="menu-icon tf-icons ri-user-line"></i>
+                <div data-i18n="Logistics">Profile</div>
+
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="#" id="logoutBtn" class="menu-link">
+                <i class="menu-icon tf-icons ri-logout-box-line"></i>
+                <div data-i18n="Logout">Logout</div>
+            </a>
+        </li>
+    </ul>
+    <?php endif; ?>
+
+
+    
 </aside>
 

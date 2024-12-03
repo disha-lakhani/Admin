@@ -6,7 +6,7 @@ if (isset($_POST['userid']) && is_numeric($_POST['userid'])) {
     $userid = (int)$_POST['userid'];
 
     // SQL query to delete the user
-    $sql = "DELETE FROM users WHERE id = $userid";
+    $sql = "DELETE FROM userss WHERE id = $userid";
 
     // Execute the query
     if (mysqli_query($conn, $sql)) {

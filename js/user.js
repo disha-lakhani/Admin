@@ -114,25 +114,24 @@ $(document).ready(function () {
             var formData = new FormData(this);
 
             $.ajax({
-                url: 'add_user.php',
-                method: 'POST',
+                url: 'insert_user.php',  
+                type: 'POST',
                 data: formData,
-                processData: false,
-                contentType: false,
-                dataType: 'json',
+                contentType: false,  
+                processData: false,  
                 success: function (response) {
-                    if (response.status === 'success') {
-                        $("#message").html('<div class="alert alert-success">' + response.message1 + "</div>");
-
+                    if(response === 'success') {
+                        $('#message').html('<div class="alert alert-success">User added successfully!</div>');
                         setTimeout(function () {
                             window.location.href = 'alluser.php';
-                        }, 2000); 
+                        }, 2000);
+    
                     } else {
-                        $("#message").html('<div class="text-danger">' + response.message1 + "</div>");
+                        $('#message').html('<div class="alert alert-danger">Error: ' + response + '</div>');
                     }
                 },
                 error: function () {
-                    $("#message").html('<div class="text-danger">An error occurred while adding the user.</div>');
+                    $('#message').html('<div class="alert alert-danger">Something went wrong. Please try again.</div>');
                 }
             });
         }

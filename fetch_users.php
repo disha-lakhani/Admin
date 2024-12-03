@@ -2,9 +2,9 @@
 require 'db.php'; 
 
 $query = "
-    SELECT ui.uid, ui.fname, ui.lname, ui.profileimage, ui.gender, ui.contact, ui.email, ui.address, u.role
+    SELECT u.id,ui.uid, ui.fname, ui.lname, ui.profileimage, ui.gender, ui.contact, ui.email, ui.address, u.role
     FROM user_info ui
-    LEFT JOIN users u ON ui.user_id = u.id
+    INNER JOIN userss u ON ui.user_id = u.id
 ";
 
 $result = mysqli_query($conn, $query);

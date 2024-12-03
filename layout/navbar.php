@@ -18,19 +18,28 @@
         <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <!-- User -->
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow p-0 d-flex align-items-center" href="javascript:void(0);"
-                    data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online me-2">
-                        <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                    </div>
-                    <div class="d-none d-sm-block">
-                        <span class="fw-semibold">John Doe</span>
-                    </div>
-                </a>
-                
-            </li>
-        </ul>
+    <!-- User Profile -->
+    <li class="nav-item">
+        <a href="javascript:void(0);" class="nav-link p-0 d-flex align-items-center">
+            <div class="avatar avatar-online me-2">
+                <!-- Use the profile image dynamically -->
+                <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="User Avatar"
+                     class="w-px-40 h-auto rounded-circle" />
+            </div>
+            <div class="d-none d-sm-block">
+                <!-- Use the user’s full name dynamically -->
+                <span class="fw-semibold"><?php echo htmlspecialchars($fullName); ?></span>
+            </div>
+        </a>
+    </li>
+
+  
+
+    <!-- Logout link -->
+   
+</ul>
+
+
+
     </div>
 </nav>

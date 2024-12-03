@@ -3,7 +3,7 @@
 
 include 'db.php';  
 
-$query = "SELECT * FROM categoryy";
+$query = "SELECT * FROM category";
 $result = mysqli_query($conn, $query);
 
 $categories = [];

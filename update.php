@@ -6,6 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+
 require 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     $updateUsersQuery = "
-        UPDATE users 
+        UPDATE userss 
         SET email = '$email', contact = '$contact', role = $role
         WHERE id = $userId
     ";

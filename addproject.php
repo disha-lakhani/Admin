@@ -1,19 +1,25 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id']) ) {
+  header('Location: login.php');
+  exit();
+}
 include 'layout/header.php';
-include 'db.php'; // Include the database connection
+include 'db.php'; 
 
-// Fetch categories from the categoryy table
-$categoryQuery = "SELECT * FROM categoryy";
+
+
+$categoryQuery = "SELECT * FROM category";
 $categoryResult = mysqli_query($conn, $categoryQuery);
 
-// Fetch managers from the users table where role = 2 (manager)
-$managerQuery = "SELECT u.id, ui.fname, ui.lname FROM users u 
+
+$managerQuery = "SELECT u.id, ui.fname, ui.lname FROM userss u 
                  JOIN user_info ui ON u.id = ui.user_id 
                  WHERE u.role = 2";
 $managerResult = mysqli_query($conn, $managerQuery);
 
-// Fetch staff from the users table where role = 3 (staff)
-$staffQuery = "SELECT u.id, ui.fname, ui.lname FROM users u 
+
+$staffQuery = "SELECT u.id, ui.fname, ui.lname FROM userss u 
                JOIN user_info ui ON u.id = ui.user_id 
                WHERE u.role = 3";
 $staffResult = mysqli_query($conn, $staffQuery);
@@ -123,6 +129,7 @@ $staffResult = mysqli_query($conn, $staffQuery);
 <?php
 include 'layout/footer.php';
 ?>
+
 
 <script>
     $(document).ready(function () {

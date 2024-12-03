@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id']) ) {
+  header('Location: login.php');
+  exit();
+}
 include 'layout/header.php';
 ?>
 
@@ -63,7 +68,7 @@ include 'layout/footer.php';
                     html += '<td>' + user.contact + '</td>';
                     html += '<td><img src="uploads/' + (user.profileimage ? user.profileimage : 'default.png') + '" alt="' + user.fname + '\'s Image" class="img-thumbnail" style="width:50px; height:50px; border-radius:50%"></td>';
                     html += '<td>' + user.address + '</td>';
-                    html += '<td><button class="btn btn-sm btn-primary edit-btn"><a href="edituser.php?id=' + user.uid + '" class="text-white">Edit</a></button> <button class="btn btn-sm btn-danger delete-btn" data-id="' + user.uid + '">Delete</button></td>';
+                    html += '<td><button class="btn btn-sm btn-primary edit-btn"><a href="edituser.php?id=' + user.uid + '" class="text-white">Edit</a></button> <button class="btn btn-sm btn-danger delete-btn" data-id="' + user.id + '">Delete</button></td>';
                     html += '</tr>';
                 });
 

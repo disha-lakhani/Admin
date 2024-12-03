@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
     $query = "
         SELECT ui.*, u.email, u.role, u.created_at
         FROM user_info ui
-        LEFT JOIN users u ON ui.user_id = u.id
+        INNER JOIN userss u ON ui.user_id = u.id
         WHERE ui.uid = $userId
     ";
 
@@ -181,7 +181,6 @@ if (isset($_GET['id'])) {
 
             $.ajax({
                 url: 'update.php',
-
                 type: 'POST',
                 data: formData,
                 processData: false,

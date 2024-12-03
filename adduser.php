@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id']) ) {
+  header('Location: login.php');
+  exit();
+}
 include 'layout/header.php';
 ?>
 
@@ -20,10 +25,10 @@ include 'layout/header.php';
                                             class="ri-user-line ri-20px"></i></span>
                                     <input type="text" class="form-control" id="fname" name="fname"
                                         placeholder="First Name" aria-label="First Name"
-                                        aria-describedby="basic-icon-default-fname"  />
+                                        aria-describedby="basic-icon-default-fname" />
                                 </div>
                                 <span id="demo1" style="color: red;">Please enter first Name</span>
-                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
@@ -33,7 +38,7 @@ include 'layout/header.php';
                                             class="ri-user-line ri-20px"></i></span>
                                     <input type="text" class="form-control" id="lname" name="lname"
                                         placeholder="Last Name" aria-label="Last Name"
-                                        aria-describedby="basic-icon-default-lname"  />
+                                        aria-describedby="basic-icon-default-lname" />
                                 </div>
                                 <span id="demo2" style="color: red;">Please enter last Name</span>
 
@@ -49,17 +54,17 @@ include 'layout/header.php';
                                 <div class="input-group input-group-merge">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="gender" id="gender-male"
-                                            value="male" >
+                                            value="male">
                                         <label class="form-check-label" for="gender-male">Male</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="gender" id="gender-female"
-                                            value="female" >
+                                            value="female">
                                         <label class="form-check-label" for="gender-female">Female</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="gender" id="gender-other"
-                                            value="other" >
+                                            value="other">
                                         <label class="form-check-label" for="gender-other">Other</label>
                                     </div>
                                 </div>
@@ -72,7 +77,7 @@ include 'layout/header.php';
                     <!-- Type (Manager or Staff) -->
                     <div class="mb-3">
                         <label for="type" class="form-label">Role</label>
-                        <select id="type" name="type" class="form-select" >
+                        <select id="type" name="type" class="form-select">
                             <option value="">Select Role</option>
                             <option value="2">Manager</option>
                             <option value="3">Staff</option>
@@ -88,7 +93,7 @@ include 'layout/header.php';
                             <span id="basic-icon-default-email" class="input-group-text"><i
                                     class="ri-mail-line ri-20px"></i></span>
                             <input type="email" id="email" name="email" class="form-control" placeholder="Email"
-                                aria-label="Email" aria-describedby="basic-icon-default-email"  />
+                                aria-label="Email" aria-describedby="basic-icon-default-email" />
                         </div>
                         <span id="demo5" style="color: red;">Please enter email</span>
 
@@ -102,7 +107,7 @@ include 'layout/header.php';
                                     class="ri-phone-fill ri-20px"></i></span>
                             <input type="text" id="contact" name="contact" class="form-control"
                                 placeholder="Contact Number" aria-label="Contact Number"
-                                aria-describedby="basic-icon-default-contact"  />
+                                aria-describedby="basic-icon-default-contact" />
                         </div>
                         <span id="demo6" style="color: red;">Please enter contact number</span>
 
@@ -124,17 +129,17 @@ include 'layout/header.php';
                                     </span>
                                     <input type="password" id="password" name="password" class="form-control"
                                         placeholder="Enter Password" aria-label="Password"
-                                        aria-describedby="basic-icon-default-password"  />
+                                        aria-describedby="basic-icon-default-password" />
                                 </div>
                                 <span id="demo8" class="error" style="color:red;">enter your password</span>
 
                             </div>
 
                             <!-- Password Confirmation Field -->
-                            
+
                         </div>
                         <div class="col-lg-6">
-                        <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="confirm-password" class="form-label">Confirm Password</label>
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-confirm-password" class="input-group-text">
@@ -143,7 +148,7 @@ include 'layout/header.php';
                                     <input type="password" id="confirm-password" name="confirm-password"
                                         class="form-control" placeholder="Confirm Password"
                                         aria-label="Confirm Password"
-                                        aria-describedby="basic-icon-default-confirm-password"  />
+                                        aria-describedby="basic-icon-default-confirm-password" />
                                 </div>
                                 <span id="demo9" class="error" style="color:red;">enter your confirm password</span>
 
@@ -158,8 +163,7 @@ include 'layout/header.php';
                             <span id="basic-icon-default-address" class="input-group-text"><i
                                     class="ri-map-pin-line ri-20px"></i></span>
                             <textarea id="address" name="address" class="form-control" placeholder="Enter your address"
-                                rows="4" aria-label="Address" aria-describedby="basic-icon-default-address"
-                                ></textarea>
+                                rows="4" aria-label="Address" aria-describedby="basic-icon-default-address"></textarea>
                         </div>
                         <span id="demo10" style="color: red;">Please enter address</span>
 
@@ -181,6 +185,16 @@ include 'layout/header.php';
 
 include 'layout/footer.php';
 ?>
+
 <script src="js/user.js"></script>
 
+<!-- <script>
+$(document).ready(function () {
+    $('#addUserForm').on('submit', function (e) {
+        e.preventDefault();
+
+        
+    });
+});
+</script> -->
 

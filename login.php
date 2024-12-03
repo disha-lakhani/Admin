@@ -1,3 +1,6 @@
+
+
+
 <!doctype html>
 
 <html lang="en" class="light-style layout-wide customizer-hide" dir="ltr" data-theme="theme-default"
@@ -8,7 +11,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Basic - Pages | Materio - Bootstrap Material Design Admin Template</title>
+    <title>loginForm</title>
 
     <meta name="description" content="" />
 
@@ -104,11 +107,13 @@
                         <h4 class="mb-1">Welcome to Materio! 👋🏻</h4>
                         <p class="mb-5">Sign in to access your dashboard.</p>
 
-                        <form id="loginForm" class="mb-5" action="" method="">
+                        <form id="loginForm" class="mb-5" action="" method="POST">
                             <div class="form-floating form-floating-outline mb-5">
                                 <input type="text" class="form-control" id="email" name="email"
                                     placeholder="Enter your email or username" autofocus />
                                 <label for="email">Email or Username</label>
+<!-- 
+                                <div class="error" id="emailError" style="color:red"></div> -->
                             </div>
                             <div class="mb-5">
                                 <div class="form-password-toggle">
@@ -122,6 +127,7 @@
                                         <span class="input-group-text cursor-pointer"><i
                                                 class="ri-eye-off-line ri-20px"></i></span>
                                     </div>
+                                    <!-- <div class="error" id="passwordError" style="color:red;"></div> -->
                                 </div>
                             </div>
                             <div class="mb-5 pb-2 d-flex justify-content-between pt-2 align-items-center">
@@ -134,10 +140,11 @@
                                 </a>
                             </div>
                             <div class="mb-5">
-                                <button class="btn btn-primary d-grid w-100" type="submit">login</button>
+                                <button class="btn btn-primary d-grid w-100 " id="submitBtn"
+                                    type="submit">login</button>
                             </div>
                         </form>
-                        <p id="message"></p>
+                        <p id="message" style="color: red;"></p>
 
 
                     </div>
@@ -177,70 +184,34 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 
-
-
     <script>
         $(document).ready(function () {
             $('#loginForm').on('submit', function (e) {
-                e.preventDefault(); // Prevent default form submission
+                e.preventDefault(); // Prevent form default submission
+
+                const email = $('#email').val();
+                const password = $('#password').val();
 
                 $.ajax({
                     url: 'log.php',
-                    method: 'POST',
-                    data: {
-                        email: $('#email').val(),
-                        password: $('#password').val()
-                    },
+                    type: 'POST',
+                    data: { email: email, password: password },
                     dataType: 'json',
                     success: function (response) {
-                        if (response.status === 'success') {
-                            $('#message')
-                                .text(response.message)
-                                .css({
-                                    'color': 'black',
-                                    'background-color': 'green',
-                                    'padding': '10px',
-                                    'border-radius': '5px',
-                                    'width': '100%',  // Make the message full width
-                                    'box-sizing': 'border-box',  // Ensure padding is included in width
-                                    'text-align': 'center'
-
-                                });
-                            setTimeout(function () {
-                                window.location.href = 'dashboard.php';
-                            }, 1000);
+                        if (response.success) {
+                            window.location.href = response.redirect;
                         } else {
-                            $('#message')
-                                .text(response.message)
-                                .css({
-                                    'color': 'white',
-                                    'background-color': 'red',
-                                    'padding': '10px',
-                                    'border-radius': '5px',
-                                    'width': '100%',
-                                    'box-sizing': 'border-box',
-                                    'text-align': 'center'
-                                });
+                            $('#message').text(response.message);
                         }
                     },
                     error: function () {
-                        $('#message')
-                            .text('An error occurred. Please try again.')
-                            .css({
-                                'color': 'white',
-                                'background-color': 'red',
-                                'padding': '10px',
-                                'border-radius': '5px',
-                                'width': '100%',
-                                'box-sizing': 'border-box',
-                                'text-align': 'center'
-                            });
+                        $('#message').text('An error occurred. Please try again.');
                     }
                 });
             });
         });
     </script>
-
+ 
 </body>
 
 </html>

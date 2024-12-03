@@ -5,7 +5,7 @@ include 'db.php';
 
 $categoryId = $_POST['id'];
 
-$query = "DELETE FROM categoryy WHERE cid = '$categoryId'";
+$query = "DELETE FROM category WHERE cid = '$categoryId'";
 
 if (mysqli_query($conn, $query)) {
     echo "Category deleted successfully";
