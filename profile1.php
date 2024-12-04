@@ -2,7 +2,7 @@
 session_start();
 require 'db.php';
 
-// Check if user is logged in
+// // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
@@ -44,7 +44,7 @@ include 'layout/header.php';
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h2 class="text-center my-5">Admin Profile</h2>
+    <h2 class="text-center my-5"> Profile</h2>
 
     <div class="row justify-content-center">
         <!-- Left side: User Details -->
@@ -52,20 +52,20 @@ include 'layout/header.php';
             <div class="card shadow-lg p-4">
                 <div class="card-header text-center bg-primary text-white">
                     <!-- Admin Details Header -->
-                    <h4 class="text-white">Admin Profile</h4>
-                    <p class="text-white">Admin User</p>
+                    <h4 class="text-white"> Profile</h4>
+                    <p class="text-white"> User</p>
                 </div>
                 <div class="card-body pt-4">
                     <div class="row">
                         <!-- Admin Name -->
                         <div class="col-12 col-md-6 mb-3">
-                            <p><i class="fas fa-user fa-lg"></i> <strong>Admin Name:</strong>
+                            <p><i class="fas fa-user fa-lg"></i> <strong>User Name:</strong>
                                 <?= htmlspecialchars($user['fname']) . ' ' . htmlspecialchars($user['lname']); ?></p>
                         </div>
 
                         <!-- Admin Email -->
                         <div class="col-12 col-md-6 mb-3">
-                            <p><i class="fas fa-envelope fa-lg"></i> <strong>Admin Email:</strong>
+                            <p><i class="fas fa-envelope fa-lg"></i> <strong>User Email:</strong>
                                 <?= htmlspecialchars($user['user_email']); ?></p>
                         </div>
 
@@ -108,26 +108,29 @@ include 'layout/header.php';
                     <!-- Edit Profile Button (only for Admin) -->
                     <?php if ($_SESSION['role'] == 1): ?>
                         <div class="text-center mt-4">
-                            <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
+                            <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a><br>
+                            <a href="changepsw.php" class="btn btn-primary">Change Password</a>
                         </div>
                     <?php endif; ?>
                     <?php if ($_SESSION['role'] == 2): ?>
                         <div class="text-center mt-4">
-                            <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
+                            <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a><br>
+                            <a href="changepsw.php" class="btn btn-primary">Change Password</a>
                         </div>
                     <?php endif; ?>
                     <?php if ($_SESSION['role'] == 3): ?>
                         <div class="text-center mt-4">
-                            <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
+                            <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a><br>
+                            <a href="changepsw.php" class="btn btn-primary">Change Password</a>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 
 </div>
-        <?php
-        // Include footer layout
-        include 'layout/footer.php';
-        ?>
+<?php
+// Include footer layout
+include 'layout/footer.php';
+?>

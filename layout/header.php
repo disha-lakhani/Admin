@@ -1,14 +1,15 @@
 <?php
-// session_start();
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Check if the user is logged in and has a valid role
-if (!isset($_SESSION['role']) || !isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 
 // Include the database connection
-include 'db.php'; 
+include 'db.php';
 
 $userId = $_SESSION['user_id'];
 $role = $_SESSION['role'];
@@ -109,6 +110,11 @@ $conn->close();
             font-family: "Roboto Slab", serif;
         }
 
+        #password_feedback {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
         .bg-menu-theme .menu-link,
         .bg-menu-theme .menu-horizontal-prev,
         .bg-menu-theme .menu-horizontal-next {
@@ -163,7 +169,6 @@ $conn->close();
         .navbar-nav {
             margin-right: 20px;
         }
-        
     </style>
 </head>
 
